@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aangan — A courtyard away from home</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #1B2140;
+    --bg-panel: #242B52;
+    --bg-panel-2: #2B3363;
+    --cream: #F5EDE0;
+    --muted: #B9B8D9;
+    --marigold: #E8A33D;
+    --marigold-soft: #F0C177;
+    --terracotta: #C1654A;
+    --sage: #8FA37E;
+    --line: rgba(245, 237, 224, 0.14);
+    --display: 'Fraunces', serif;
+    --body: 'Work Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: var(--body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  ::selection { background: var(--marigold); color: var(--bg); }
+
+  :focus-visible {
+    outline: 2px solid var(--marigold-soft);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--marigold-soft);
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero {
+    position: relative;
+    padding: 88px 0 64px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.08;
+    margin: 18px 0 6px;
+  }
+
+  .hero .devanagari {
+    display: block;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(40px, 7vw, 64px);
+    color: var(--marigold);
+    margin-bottom: 4px;
+  }
+
+  .hero p.sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 18px 0 30px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--marigold);
+    color: #1B2140;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 26px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--marigold-soft); transform: translateY(-1px); }
+
+  .hero-note {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  /* courtyard svg */
+  .courtyard { width: 100%; height: auto; }
+  .diya { animation: glow 3.2s ease-in-out infinite; transform-origin: center; }
+  .diya.d2 { animation-delay: 0.6s; }
+  .diya.d3 { animation-delay: 1.2s; }
+  .diya.d4 { animation-delay: 1.8s; }
+  .diya.d5 { animation-delay: 2.4s; }
+  @keyframes glow {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+
+  /* ---------- PROBLEM ---------- */
+
+  .problem {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .problem-inner {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 48px;
+  }
+
+  .problem h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(24px, 3.4vw, 32px);
+    line-height: 1.2;
+  }
+
+  .problem p {
+    font-size: 16.5px;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+
+  /* ---------- MODEL ---------- */
+
+  .model { padding: 80px 0; border-bottom: 1px solid var(--line); }
+
+  .model h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 36px);
+    margin: 10px 0 44px;
+    max-width: 20ch;
+  }
+
+  .model-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .model-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 28px 24px;
+  }
+
+  .model-card .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .model-card.amma .tag { color: var(--marigold-soft); }
+  .model-card.khel .tag { color: var(--sage); }
+  .model-card.sang .tag { color: var(--terracotta); }
+
+  .model-card h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 22px;
+    margin: 10px 0 12px;
+  }
+
+  .model-card p {
+    font-size: 14.5px;
+    color: var(--muted);
+  }
+
+  /* ---------- DAY ---------- */
+
+  .day { padding: 72px 0; border-bottom: 1px solid var(--line); }
+
+  .day h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(24px, 3.4vw, 32px);
+    margin-bottom: 30px;
+  }
+
+  .schedule {
+    display: grid;
+    gap: 2px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background: var(--bg-panel);
+    padding: 13px 20px;
+    gap: 18px;
+    align-items: baseline;
+  }
+
+  .schedule-row .time {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--marigold-soft);
+  }
+
+  .schedule-row .what { font-size: 14.5px; color: var(--cream); }
+  .schedule-row .what .who {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 8px;
+  }
+
+  /* ---------- FOUNDER ---------- */
+
+  .roadmap { padding: 80px 0; border-bottom: 1px solid var(--line); }
+
+  .roadmap h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 36px);
+    margin: 10px 0 14px;
+    max-width: 22ch;
+  }
+
+  .roadmap > .wrap > p.lead {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 62ch;
+    margin-bottom: 44px;
+  }
+
+  .phases { display: grid; gap: 2px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+
+  .phase {
+    background: var(--bg-panel);
+    padding: 28px 30px;
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+  }
+
+  .phase .stage {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .phase.now .stage { color: var(--sage); }
+  .phase.next .stage { color: var(--marigold-soft); }
+  .phase.later .stage { color: var(--terracotta); }
+
+  .phase h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 20px;
+    margin: 4px 0 10px;
+  }
+
+  .phase p { font-size: 14.5px; color: var(--muted); max-width: 60ch; }
+
+  .founder { padding: 72px 0; border-bottom: 1px solid var(--line); }
+
+  .founder-inner {
+    max-width: 60ch;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .founder .eyebrow { display: block; margin-bottom: 14px; }
+
+  .founder p {
+    font-family: var(--display);
+    font-size: clamp(19px, 2.4vw, 23px);
+    line-height: 1.55;
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .founder p + p { margin-top: 18px; }
+
+  /* ---------- WAITLIST ---------- */
+
+  .waitlist {
+    padding: 80px 0 90px;
+  }
+
+  .waitlist-inner {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 44px;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 40px;
+  }
+
+  .waitlist h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(24px, 3.4vw, 30px);
+    margin: 10px 0 12px;
+  }
+
+  .form-embed {
+    background: var(--cream);
+    border-radius: 4px;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .form-embed iframe {
+    display: block;
+    border: none;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    padding: 32px 0 48px;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+
+  @media (max-width: 820px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero { padding: 56px 0 40px; }
+    .problem-inner { grid-template-columns: 1fr; gap: 20px; }
+    .model-grid { grid-template-columns: 1fr; }
+    .phase { grid-template-columns: 1fr; gap: 8px; }
+    .waitlist-inner { grid-template-columns: 1fr; padding: 28px; }
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">FOR DIASPORA MOTHERS + THEIR LITTLE ONES</span>
+        <h1><span class="devanagari">आँगन</span>Aangan</h1>
+        <p class="sub">A courtyard away from home — where you rest, your child plays, and you both remember who you are, together.</p>
+        <a href="#waitlist" class="btn">Join the waitlist →</a>
+        <div class="hero-note">FIRST RETREAT · TARGET 2027 · LOCATION TBA</div>
+      </div>
+      <svg class="courtyard" viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line illustration of a courtyard with a central tree and hanging lamps">
+        <!-- ground -->
+        <path d="M20 330 Q210 300 400 330" stroke="var(--line)" stroke-width="1.5" fill="none"/>
+        <!-- tree trunk -->
+        <path d="M210 330 L210 210" stroke="var(--marigold-soft)" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M210 250 L185 230 M210 240 L235 220 M210 270 L190 255 M210 260 L232 248" stroke="var(--marigold-soft)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- canopy -->
+        <circle cx="210" cy="175" r="72" fill="none" stroke="var(--sage)" stroke-width="1.4" opacity="0.5"/>
+        <circle cx="175" cy="150" r="8" fill="none" stroke="var(--sage)" stroke-width="1.4"/>
+        <circle cx="240" cy="140" r="10" fill="none" stroke="var(--sage)" stroke-width="1.4"/>
+        <circle cx="210" cy="115" r="9" fill="none" stroke="var(--sage)" stroke-width="1.4"/>
+        <circle cx="150" cy="185" r="7" fill="none" stroke="var(--sage)" stroke-width="1.4"/>
+        <circle cx="265" cy="185" r="8" fill="none" stroke="var(--sage)" stroke-width="1.4"/>
+        <!-- string of diyas -->
+        <path d="M50 90 Q210 40 380 90" stroke="var(--line)" stroke-width="1" fill="none"/>
+        <circle class="diya d1" cx="80" cy="86" r="5" fill="var(--marigold)"/>
+        <circle class="diya d2" cx="150" cy="60" r="5" fill="var(--marigold)"/>
+        <circle class="diya d3" cx="210" cy="50" r="5" fill="var(--marigold)"/>
+        <circle class="diya d4" cx="270" cy="60" r="5" fill="var(--marigold)"/>
+        <circle class="diya d5" cx="340" cy="86" r="5" fill="var(--marigold)"/>
+        <!-- two small figures, mother + child, either side -->
+        <g transform="translate(95,280)">
+          <circle cx="0" cy="0" r="9" fill="none" stroke="var(--cream)" stroke-width="1.6"/>
+          <path d="M-12 40 Q0 15 12 40" fill="none" stroke="var(--cream)" stroke-width="1.6"/>
+        </g>
+        <g transform="translate(130,300) scale(0.65)">
+          <circle cx="0" cy="0" r="9" fill="none" stroke="var(--cream)" stroke-width="1.6"/>
+          <path d="M-12 40 Q0 15 12 40" fill="none" stroke="var(--cream)" stroke-width="1.6"/>
+        </g>
+        <g transform="translate(320,282)">
+          <circle cx="0" cy="0" r="9" fill="none" stroke="var(--terracotta)" stroke-width="1.6"/>
+          <path d="M-12 40 Q0 15 12 40" fill="none" stroke="var(--terracotta)" stroke-width="1.6"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="problem">
+    <div class="wrap problem-inner">
+      <h2>Every retreat asks you to choose.</h2>
+      <p>
+        Most wellness retreats ask mothers to leave their kids at home. Most family trips ask mothers to set
+        their own needs aside entirely. And almost none hold what it actually means to raise a child between
+        two cultures — homesick for a place your child has never even seen, trying to pass down a language
+        that's slipping, missing a village of aunties who would have helped you do this. Aangan is a retreat
+        built to hold all of it at once: you, your child, and the culture you're both still learning to carry.
+      </p>
+    </div>
+  </section>
+
+  <section class="model">
+    <div class="wrap">
+      <span class="eyebrow">THE AANGAN MODEL</span>
+      <h2>Three kinds of time, one weekend.</h2>
+      <div class="model-grid">
+        <div class="model-card amma">
+          <span class="tag">अम्मा · for you</span>
+          <h3>Amma Time</h3>
+          <p>Circles, movement, and rest with other mothers who get it — the isolation, the mental load,
+          the quiet ache of missing home. Space to be a woman again, not just someone's mother.</p>
+        </div>
+        <div class="model-card khel">
+          <span class="tag">खेल · for them</span>
+          <h3>Khel Time</h3>
+          <p>A culturally rooted kids' program — storytelling in your mother tongue, folk games, art, and
+          music — led by caregivers who share their heritage, not a generic kids' club.</p>
+        </div>
+        <div class="model-card sang">
+          <span class="tag">संग · together</span>
+          <h3>Sang Time</h3>
+          <p>Cooking, dance, and ritual passed hand to hand, plus simple unstructured time to just be a
+          family — away from the noise, close to where you both came from.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="day">
+    <div class="wrap">
+      <h2>A draft day at Aangan</h2>
+      <div class="schedule">
+        <div class="schedule-row"><span class="time">7:30 AM</span><span class="what">Chai &amp; slow breakfast <span class="who">TOGETHER</span></span></div>
+        <div class="schedule-row"><span class="time">9:00 AM</span><span class="what">Khel begins — folk games &amp; storytelling <span class="who">KIDS</span></span></div>
+        <div class="schedule-row"><span class="time">9:00 AM</span><span class="what">Movement circle for mothers <span class="who">AMMA</span></span></div>
+        <div class="schedule-row"><span class="time">11:00 AM</span><span class="what">Group lunch, family style <span class="who">TOGETHER</span></span></div>
+        <div class="schedule-row"><span class="time">1:00 PM</span><span class="what">Free time / nap / pool <span class="who">TOGETHER</span></span></div>
+        <div class="schedule-row"><span class="time">4:00 PM</span><span class="what">Mother-child cooking or dance session <span class="who">SANG</span></span></div>
+        <div class="schedule-row"><span class="time">7:00 PM</span><span class="what">Dinner &amp; evening circle by the diyas <span class="who">TOGETHER</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="roadmap">
+    <div class="wrap">
+      <span class="eyebrow">WHERE THIS IS HEADED</span>
+      <h2>One home base. Then anywhere.</h2>
+      <p class="lead">
+        Aangan starts as a single retreat you travel to. Over time, it becomes a retreat that travels
+        with you — wherever that is.
+      </p>
+      <div class="phases">
+        <div class="phase now">
+          <span class="stage">NOW</span>
+          <div>
+            <h3>Home Base Retreats</h3>
+            <p>One fixed location, run a few times a year, so we can get the Amma / Khel / Sang model right
+            before we take it anywhere else.</p>
+          </div>
+        </div>
+        <div class="phase next">
+          <span class="stage">NEXT</span>
+          <div>
+            <h3>Travel Retreats — Domestic &amp; International</h3>
+            <p>Aangan plans the trip — a lake town two hours away, or a village back home you haven't
+            visited in years — and arranges vetted local nannies at the destination to run the Khel camp:
+            games, activities, and culturally rooted playtime for your kids. You still get Amma Time, Sang
+            Time, and real rest, no matter where the retreat lands.</p>
+          </div>
+        </div>
+        <div class="phase later">
+          <span class="stage">LATER</span>
+          <div>
+            <h3>On-Demand, Anywhere</h3>
+            <p>The same trusted, vetted nanny network available for your own family trips — local or
+            international — so you can travel outside of Aangan retreats and still get real childcare support.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="founder">
+    <div class="wrap founder-inner">
+      <span class="eyebrow">A NOTE FROM ME</span>
+      <p>I'm building Aangan because every "mom and me" retreat I found didn't hold the parts of me shaped
+      by immigration, a language I'm slowly losing, and a childhood I want my kids to at least taste.</p>
+      <p>I don't have every detail figured out yet — the location, the exact dates, the price. What I do
+      have is the shape of it, and a belief that it should be built with the women who need it, not just for
+      them. If this is you, join the list below and tell me what would make you say yes.</p>
+    </div>
+  </section>
+
+  <section class="waitlist" id="waitlist">
+    <div class="wrap">
+      <div class="waitlist-inner">
+        <div>
+          <span class="eyebrow">FOUNDING WAITLIST</span>
+          <h2>Be the first to know.</h2>
+          <p style="color:var(--muted); font-size:14.5px;">No commitment, no payment — just a way for me
+          to reach you first when dates, location, and pricing are set. I'll also ask what would make this
+          feel right for your family.</p>
+        </div>
+
+        <div class="form-embed">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSesFMv0d2qJnwuxsiPS6Yo5cqIP0AvAT7_oE5iES0R4-65IZA/viewform?embedded=true"
+                  width="100%" height="1081" frameborder="0" marginheight="0" marginwidth="0">
+            Loading…
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>AANGAN · A RETREAT CONCEPT IN DEVELOPMENT · REPLY DIRECTLY IF YOU HAVE QUESTIONS</p>
+  </footer>
+
+</body>
+</html>
